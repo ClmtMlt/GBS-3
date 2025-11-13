@@ -1,0 +1,50 @@
+<nav class="navbar custom-navbar navbar-expand-lg fixed-top">
+  <div class="container-fluid">
+    <%= link_to "GuideBySo", root_path, class: "navbar-brand fw-bold" %>
+
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
+            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+
+    <div class="collapse navbar-collapse" id="navbarContent">
+      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="quiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Qui suis-je ?
+          </a>
+          <ul class="dropdown-menu dropdown-slide-right" aria-labelledby="quiDropdown">
+            <li><%= link_to "Présentation", "#{me_path}#presentation", class: "dropdown-item scroll-link" %></li>
+            <li><%= link_to "Mes Réseaux", "#{me_path}#mes_reseaux", class: "dropdown-item scroll-link" %></li>
+            <li><%= link_to "Outils", "#{me_path}#outils", class: "dropdown-item scroll-link" %></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="projetsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Projets
+          </a>
+          <ul class="dropdown-menu dropdown-slide-right" aria-labelledby="projetsDropdown">
+            <li><%= link_to "Collaboration", "#{projet_path}#collaboration", class: "dropdown-item scroll-link" %></li>
+            <li><%= link_to "Contenu GBS (UGC)", "#{projet_path}#contenu_gbs", class: "dropdown-item scroll-link" %></li>
+          </ul>
+        </li>
+
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            Services
+          </a>
+          <ul class="dropdown-menu dropdown-slide-right" aria-labelledby="servicesDropdown">
+            <li><%= link_to "Community Management", "#{services_path}#community_management", class: "dropdown-item scroll-link" %></li>
+            <li><%= link_to "Préstations Créatives", "#{services_path}#prestations_reatives", class: "dropdown-item scroll-link" %></li>
+            <li><%= link_to "Collaboration", "#{services_path}#collaboration_2", class: "dropdown-item scroll-link" %></li>
+          </ul>
+        </li>
+      </ul>
+
+      <div class="d-flex">
+        <%= link_to "Contact", contact_path, class: "btn btn-dark" %>
+      </div>
+    </div>
+  </div>
+</nav>
