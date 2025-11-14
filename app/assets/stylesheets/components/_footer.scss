@@ -1,0 +1,51 @@
+/* Assurez-vous que le parent du footer a min-height: 100% et display:flex/column */
+.footer {
+  flex-shrink: 0; /* ne pas rétrécir */
+  background-color: #ffffff;
+  color: #000000;
+
+  .photo-block {
+    img {
+      object-fit: cover;
+      border-width: 1px;
+      border-color: #d3d3d3; // light gray
+      transition: transform 0.3s;
+    }
+    .fw-bold {
+      font-size: 1rem;
+      margin-top: 0.5rem;
+    }
+  }
+
+  .social-block {
+    display: flex;
+    align-items: center;
+
+    .social-icon {
+      transition: color 0.3s, transform 0.3s;
+
+      &:hover {
+        color: #555555;       /* gris au hover */
+        transform: translateY(-3px); /* petit lift */
+      }
+    }
+  }
+
+  .copyright {
+    border-top: 1px solid #d3d3d3; /* léger trait */
+    padding-top: 1.5rem;           /* espace entre trait et texte */
+    padding-bottom: 1.5rem;        /* espace entre texte et bas du footer */
+    font-size: 0.9rem;
+    text-align: center;
+  }
+}
+
+/* Responsive */
+@media (max-width: 768px) {
+  .footer .col-12 {
+    margin-bottom: 2rem;
+  }
+  .footer .d-flex.flex-column.flex-md-row {
+    gap: 3rem; /* espace vertical sur mobile */
+  }
+}

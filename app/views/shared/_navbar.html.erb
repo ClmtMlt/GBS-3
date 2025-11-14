@@ -1,50 +1,82 @@
-<nav class="navbar custom-navbar navbar-expand-lg fixed-top">
+<nav class="navbar navbar-expand-lg navbar-custom">
   <div class="container-fluid">
+
+    <!-- Left logo/text -->
     <%= link_to "GuideBySo", root_path, class: "navbar-brand fw-bold" %>
 
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarContent"
-            aria-controls="navbarContent" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
+    <!-- Mobile button -->
+    <button id="mobileNavbarToggler" class="navbar-toggler" type="button">
+      ☰
     </button>
 
-    <div class="collapse navbar-collapse" id="navbarContent">
-      <ul class="navbar-nav me-auto mb-2 mb-lg-0">
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="quiDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    <!-- Desktop menu -->
+    <div class="collapse navbar-collapse d-none d-lg-flex">
+
+      <ul class="navbar-nav">
+
+        <!-- Qui suis-je ? -->
+        <li class="nav-item dropdown <%= active_nav_class(me_path) %>">
+          <a class="nav-link dropdown-toggle" href="#" data-turbo="false">
             Qui suis-je ?
           </a>
-          <ul class="dropdown-menu dropdown-slide-right" aria-labelledby="quiDropdown">
-            <li><%= link_to "Présentation", "#{me_path}#presentation", class: "dropdown-item scroll-link" %></li>
-            <li><%= link_to "Mes Réseaux", "#{me_path}#mes_reseaux", class: "dropdown-item scroll-link" %></li>
-            <li><%= link_to "Outils", "#{me_path}#outils", class: "dropdown-item scroll-link" %></li>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Présentation", me_path(anchor: "presentation"), class: "dropdown-item" %></li>
+            <li><%= link_to "Mes Réseaux", me_path(anchor: "reseaux"), class: "dropdown-item" %></li>
+            <li><%= link_to "Outils",       me_path(anchor: "outils"), class: "dropdown-item" %></li>
           </ul>
         </li>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="projetsDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <!-- Projets -->
+        <li class="nav-item dropdown <%= active_nav_class(projet_path) %>">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-turbo="false">
             Projets
           </a>
-          <ul class="dropdown-menu dropdown-slide-right" aria-labelledby="projetsDropdown">
-            <li><%= link_to "Collaboration", "#{projet_path}#collaboration", class: "dropdown-item scroll-link" %></li>
-            <li><%= link_to "Contenu GBS (UGC)", "#{projet_path}#contenu_gbs", class: "dropdown-item scroll-link" %></li>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Projet A", projet_path(anchor: "a"), class: "dropdown-item" %></li>
+            <li><%= link_to "Projet B", projet_path(anchor: "b"), class: "dropdown-item" %></li>
+            <li><%= link_to "Projet C", projet_path(anchor: "c"), class: "dropdown-item" %></li>
           </ul>
         </li>
 
-        <li class="nav-item dropdown">
-          <a class="nav-link dropdown-toggle" href="#" id="servicesDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+        <!-- Services -->
+        <li class="nav-item dropdown <%= active_nav_class(services_path) %>">
+          <a class="nav-link dropdown-toggle" href="#" data-bs-toggle="dropdown" data-turbo="false">
             Services
           </a>
-          <ul class="dropdown-menu dropdown-slide-right" aria-labelledby="servicesDropdown">
-            <li><%= link_to "Community Management", "#{services_path}#community_management", class: "dropdown-item scroll-link" %></li>
-            <li><%= link_to "Préstations Créatives", "#{services_path}#prestations_reatives", class: "dropdown-item scroll-link" %></li>
-            <li><%= link_to "Collaboration", "#{services_path}#collaboration_2", class: "dropdown-item scroll-link" %></li>
+          <ul class="dropdown-menu">
+            <li><%= link_to "Service 1", services_path(anchor: "s1"), class: "dropdown-item" %></li>
+            <li><%= link_to "Service 2", services_path(anchor: "s2"), class: "dropdown-item" %></li>
+            <li><%= link_to "Service 3", services_path(anchor: "s3"), class: "dropdown-item" %></li>
           </ul>
         </li>
+
       </ul>
 
-      <div class="d-flex">
-        <%= link_to "Contact", contact_path, class: "btn btn-dark" %>
-      </div>
+      <!-- Contact button -->
+      <%= link_to "Contact", contact_path, class: "btn btn-dark px-4" %>
+
     </div>
+
+    <!-- Mobile menu -->
+    <div id="mobileNavbarMenu" class="d-lg-none d-none mt-3">
+
+      <div class="mb-2 fw-bold">Qui suis-je :</div>
+      <%= link_to "Présentation", me_path(anchor: "presentation"), class: "dropdown-item" %>
+      <%= link_to "Mes Réseaux", me_path(anchor: "reseaux"), class: "dropdown-item" %>
+      <%= link_to "Outils",       me_path(anchor: "outils"), class: "dropdown-item mb-3" %>
+
+      <div class="mb-2 fw-bold">Projets :</div>
+      <%= link_to "Projet A", projet_path(anchor: "a"), class: "dropdown-item" %>
+      <%= link_to "Projet B", projet_path(anchor: "b"), class: "dropdown-item" %>
+      <%= link_to "Projet C", projet_path(anchor: "c"), class: "dropdown-item mb-3" %>
+
+      <div class="mb-2 fw-bold">Services :</div>
+      <%= link_to "Service 1", services_path(anchor: "s1"), class: "dropdown-item" %>
+      <%= link_to "Service 2", services_path(anchor: "s2"), class: "dropdown-item" %>
+      <%= link_to "Service 3", services_path(anchor: "s3"), class: "dropdown-item mb-3" %>
+
+      <%= link_to "Contact", contact_path, class: "btn btn-dark w-100 mt-3" %>
+    </div>
+
   </div>
 </nav>

@@ -1,57 +1,95 @@
-.custom-navbar {
+/* =======================
+   Navbar globale
+======================= */
+/* Desktop navbar */
+/* Desktop navbar */
+.navbar-custom {
+  .navbar-collapse {
+    display: flex !important;
+    justify-content: space-between;
+    align-items: center;
+
+    .navbar-nav {
+      display: flex;
+      gap: 2rem;
+      margin-left: auto;
+
+      .nav-item {
+        position: relative;
+
+        .nav-link {
+          position: relative;
+          display: inline-block;      /* important pour que ::after fonctionne */
+          padding-bottom: 0.25rem;
+
+          &::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background-color: #000;
+            border-radius: 1px;
+            transition: width 0.3s;
+          }
+
+          &:hover::after {
+            width: 100%;
+          }
+        }
+
+        &.active-menu > .nav-link::after {
+          width: 100%; /* menu actif toujours souligné */
+        }
+      }
+    }
+
+    .btn {
+      margin-left: 2rem;
+    }
+  }
+}
+
+.navbar-custom {
+  position: fixed;
+  top: 10px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 90%;
+  z-index: 2000;
   background-color: #fff;
-  color: #000;
   border-radius: 12px;
-  box-shadow: 0 2px 10px rgba(0,0,0,0.1);
-  padding: 0.5rem 1rem;
-  margin: 10px auto;
-  max-width: 1200px;
-  z-index: 1030;
+  padding: 10px 20px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
   transition: all 0.3s ease;
 
   &.scrolled {
-    box-shadow: 0 6px 20px rgba(0,0,0,0.2);
-    background-color: rgba(255, 255, 255, 0.95);
+    box-shadow: 0 6px 20px rgba(0,0,0,0.15);
     backdrop-filter: blur(4px);
   }
 
   .navbar-brand {
-    font-size: 1.25rem;
+    font-size: 2rem;  // Taille responsive
     font-weight: bold;
+    color: #000;
   }
 
   .nav-link {
     color: #000 !important;
-    transition: color 0.3s ease;
+    transition: color 0.2s ease;
 
     &:hover {
       color: #555 !important;
     }
   }
 
-  // Dropdown menu slide from right
-  .dropdown-menu.dropdown-slide-right {
-    border-radius: 8px;
-    box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-    transform: translateX(20px);
-    opacity: 0;
-    transition: all 0.3s ease;
-
-    &.show-slide {
-      transform: translateX(0);
-      opacity: 1;
-    }
-
-    .dropdown-item {
-      transition: all 0.3s ease;
-      &:hover {
-        background-color: #f2f2f2;
-      }
-    }
-  }
-
   .btn-dark {
-    transition: background 0.3s ease, color 0.3s ease;
+    background-color: #000;
+    color: #fff;
+    transition: all 0.2s ease;
+    margin-left: 2rem; // espace entre dernier menu et Contact
+
     &:hover {
       background-color: #333;
       color: #fff;
@@ -59,15 +97,105 @@
   }
 }
 
-// Mobile responsiveness
-@media (max-width: 992px) {
-  .custom-navbar {
-    padding: 0.5rem 0.8rem;
+/* Container principal avec flex pour alignement logo / menus / contact */
+.navbar-custom .container-fluid {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
 
-    .dropdown-menu {
-      transform: translateX(0);
-      opacity: 1 !important;
-      visibility: visible !important;
+/* Groupe des menus déroulants */
+.navbar-nav {
+  display: flex;
+  gap: 2rem;     // espace égal entre chaque menu dropdown
+  margin-left: auto; // pousse menus à droite du logo
+}
+
+/* =======================
+   Dropdowns modernes + cascade + micro-bounce
+======================= */
+.navbar-nav .dropdown {
+  position: relative;
+
+  .dropdown-menu {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    display: block;
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px);
+    transition: all 0.25s ease-in-out;
+    background-color: #fff;
+    border: 1px solid #e0e0e0;
+    border-radius: 10px;
+    box-shadow: 0 4px 12px rgba(0,0,0,0.08);
+    min-width: 180px;
+    padding: 0.5rem 0;
+    z-index: 2000;
+
+    .dropdown-item {
+      color: #000;
+      padding: 0.5rem 1.2rem;
+      opacity: 0;
+      transform: translateY(10px);
+      transition: all 0.25s ease-in-out;
+
+      &:hover {
+        background-color: #f5f5f5;
+        color: #000;
+        transform: translateY(0) scale(1.03); // micro-bounce
+      }
     }
+  }
+
+  &:hover .dropdown-menu {
+    opacity: 1;
+    visibility: visible;
+
+    .dropdown-item {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+
+  /* Cascade animation pour les items */
+  &:hover .dropdown-menu .dropdown-item:nth-child(1) { transition-delay: 0.05s; }
+  &:hover .dropdown-menu .dropdown-item:nth-child(2) { transition-delay: 0.10s; }
+  &:hover .dropdown-menu .dropdown-item:nth-child(3) { transition-delay: 0.15s; }
+  &:hover .dropdown-menu .dropdown-item:nth-child(4) { transition-delay: 0.20s; }
+  &:hover .dropdown-menu .dropdown-item:nth-child(5) { transition-delay: 0.25s; }
+  &:hover .dropdown-menu .dropdown-item:nth-child(6) { transition-delay: 0.30s; }
+}
+
+/* Supprime les flèches Bootstrap */
+.navbar .dropdown-toggle::after {
+  display: none;
+}
+
+/* =======================
+   Menu mobile
+======================= */
+#mobileNavbarMenu {
+  display: none;
+  background-color: #fff;
+  border-radius: 12px;
+  padding: 10px;
+  margin-top: 12px;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.08);
+}
+
+@media (max-width: 1200px) {
+  .navbar-nav {
+    gap: 1.5rem;
+  }
+}
+
+@media (max-width: 992px) {
+  .navbar-nav {
+    display: none; // menus cachés, seul hamburger visible
+  }
+  #mobileNavbarMenu.d-block {
+    display: block;
   }
 }
